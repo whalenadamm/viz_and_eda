@@ -227,4 +227,8 @@ weather_df %>%
   )
 ```
 
+## Quick note
+
+`summarize` only gets you so far. Can't really do more than single numbers (univariate analysis). 
+
 
