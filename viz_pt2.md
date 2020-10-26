@@ -240,3 +240,28 @@ Look around in `ggthemes::` for different themes, like `theme_economist`
 or `theme_excel`. As long as it’s clear, it doesn’t really matter. Note
 that theme tweaks (like legend position) have to be set after the main
 theme is set, otherwise it is overwritten.
+
+## Setting options
+
+It can be helpful to include global options at the beginning of every
+working document that will be consistent throughout.
+
+``` r
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = 0.6
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.color = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_color_discrete = scale_color_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
