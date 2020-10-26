@@ -184,3 +184,59 @@ weather_df %>%
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
 ![](viz_pt2_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+## Themes
+
+Shift the legend.
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily temperature (C)",
+    caption = "Data from the rnoaa package; temperatures in 2017"
+  ) +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+    ) +
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](viz_pt2_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+Now, change the overall theme.
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily temperature (C)",
+    caption = "Data from the rnoaa package; temperatures in 2017"
+    ) +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+    ) +
+  # theme_bw()
+  # theme_classic()
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](viz_pt2_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+Look around in `ggthemes::` for different themes, like `theme_economist`
+or `theme_excel`. As long as it’s clear, it doesn’t really matter. Note
+that theme tweaks (like legend position) have to be set after the main
+theme is set, otherwise it is overwritten.
