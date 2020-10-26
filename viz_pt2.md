@@ -113,3 +113,74 @@ weather_df %>%
     ## Warning: Removed 15 rows containing missing values (geom_point).
 
 ![](viz_pt2_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+## Scales
+
+Let’s start with the same plot; x and y scales
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs (
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily temperature (C)",
+    caption = "Data from the rnoaa package; temperatures in 2017"
+  ) +
+  scale_x_continuous(
+    breaks = c(-15, 0, 15),
+    labels = c("-15 C", "0 C", "15 C")
+  ) +
+  scale_y_continuous(
+    # trans = "log" 
+    # position = "right"
+  )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](viz_pt2_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+Now, let’s try color scales. FIrst making our own (bad)
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs (
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily temperature (C)",
+    caption = "Data from the rnoaa package; temperatures in 2017"
+  ) +
+  scale_color_hue(
+    name = "Location", # rename the legend
+    h = c(100, 300))
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](viz_pt2_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+…then using a built color scale.
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs (
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily temperature (C)",
+    caption = "Data from the rnoaa package; temperatures in 2017"
+  ) +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+    )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](viz_pt2_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
